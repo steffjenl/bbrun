@@ -1,7 +1,7 @@
-const docker = require("./docker");
-const { parseVars, load, loadBitbucketEnv } = require("./environment");
+import * as docker from './docker.js';
+import { parseVars, load, loadBitbucketEnv } from './environment.js';
 
-function exec(script, image, flags) {
+export default function exec(script, image, flags) {
   let environmentVars = flags.env ? parseVars(flags.env) : [];
   if (flags.envfile) {
     let loadEnvVars = load(flags.envfile);
@@ -13,8 +13,5 @@ function exec(script, image, flags) {
     'set -e',
     script
   );
-  console.log(commands);
   docker.run(commands, image, flags.dryRun, flags.interactive, flags.workDir, flags.ignoreFolder, flags.keepContainer);
 }
-
-module.exports.exec = exec;

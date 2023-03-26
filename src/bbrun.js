@@ -1,11 +1,11 @@
-const docker = require("./docker");
-const { readTemplate } = require("./template");
-const { exec } = require("./exec");
-const assert = require("check-types").assert;
+import * as docker from './docker.js';
+import {readTemplate} from './template.js';
+import exec from './exec.js';
+import assert from 'check-types';
 
 const BB_TEMPLATE = "bitbucket-pipelines.yml";
 
-module.exports = function(options, stepName) {
+export default function(options, stepName) {
   options.template = options.template || BB_TEMPLATE;
   options.pipeline = options.pipeline || "default";
   options.workDir = options.workDir || "/ws";

@@ -1,8 +1,8 @@
 #!/usr/bin/env node
 
 "use strict";
-const meow = require("meow");
-const bbrun = require("./src/bbrun");
+import meow from 'meow';
+import bbrun from './src/bbrun.js';
 
 const cli = meow(
   `
@@ -13,12 +13,12 @@ Options
     --template (-t), build template, defaults to "bitbucket-pipelines.yml"
     --pipeline (-p), pipeline to execute. "default" if not provided
     --env (-e), define environment variables for execution
-    --envfile (-ef), define environment file variables for execution
-    --work-dir (-w), docker working directory, defaults to "ws"
-    --dry-run (-d), performs dry run, printing the docker command
+    --envfile (-ef), define environment file variables for execution, defaults to ".env.bitbucket"
+    --workDir (-w), docker working directory, defaults to "ws"
+    --dryRun (-d), performs dry run, printing the docker command
     --interactive (-i), starts an interactive bash session in the container
-    --ignore-folder (-if), maps the folder to an empty folder (useful for forcing package managers to reinstall)
-    --keep-container (-k), does not remove the container after build (ignores --interactive)
+    --ignoreFolder (-if), maps the folder to an empty folder (useful for forcing package managers to reinstall)
+    --keepContainer (-k), does not remove the container after build (ignores --interactive)
     --help, prints this very guide
 
 Examples:
@@ -36,14 +36,17 @@ Examples:
     $ bbrun test --env "EDITOR=vim, USER=root"
 `,
   {
+    importMeta: import.meta,
     flags: {
       pipeline: {
         type: "string",
-        alias: "p"
+        alias: "p",
+        default: "default"
       },
       template: {
         type: "string",
-        alias: "t"
+        alias: "t",
+        default: "bitbucket-pipelines.yml"
       },
       env: {
         type: "string",
@@ -51,25 +54,27 @@ Examples:
       },
       envfile: {
         type: "string",
-        alias: "ef"
+        alias: "ef",
+        default: ".env.bitbucket"
       },
-      "work-dir": {
+      "workDir": {
         type: "string",
-        alias: "w"
+        alias: "w",
+        default: "/ws"
       },
       interactive: {
         type: "boolean",
         alias: "i"
       },
-      "keep-container": {
+      "keepContainer": {
         type: "boolean",
         alias: "k"
       },
-      "dry-run": {
+      "dryRun": {
         type: "boolean",
         alias: "d"
       },
-      "ignore-folder": {
+      "ignoreFolder": {
         type: "string",
         alias: "f"
       }
@@ -77,9 +82,9 @@ Examples:
   }
 );
 
-try {
+//try {
   bbrun(cli.flags, cli.input[0]);
-} catch (error) {
-  console.error(error.message);
-  process.exit(1);
-}
+//} catch (error) {
+//  console.error(error.message);
+//  process.exit(1);
+//}

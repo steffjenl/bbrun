@@ -1,15 +1,16 @@
 "use strict";
-const fs = require("fs");
-const os = require("os");
-const exec = require("shelljs").exec;
+import fs from 'fs';
+import os from 'os';
+import shell from 'shelljs';
 
-function save(env, location) {
+
+export function save(env, location) {
   //TODO: validate
   fs.appendFileSync(`${location}`, env);
   console.log(`${env} saved to ${location}`);
 }
 
-function load(location) {
+export function load(location) {
   if (!fs.existsSync(location)) {
     return [];
   } else {
@@ -17,20 +18,21 @@ function load(location) {
   }
 }
 
-function loadBitbucketEnv() {
+export function loadBitbucketEnv() {
   let envArs = [
     'CI=true',
+    'BBRUN=true',
     'BITBUCKET_SSH_KEY_FILE=~/.ssh/id_rsa'
   ];
 
   // retrieve BITBUCKET_BRANCH
-  const commitHash = exec(`git branch --show-current`, { async: false, silent: true });
+  const commitHash = shell.exec(`git branch --show-current`, { async: false, silent: true });
   if (commitHash.code === 0 && commitHash.stdout) {
     envArs = envArs.concat(`BITBUCKET_BRANCH="${commitHash.stdout.trim()}"`);
   }
 
   // retrieve BITBUCKET_COMMIT
-  const branchName = exec(`git rev-parse HEAD`, { async: false, silent: true });
+  const branchName = shell.exec(`git rev-parse HEAD`, { async: false, silent: true });
   if (branchName.code === 0 && branchName.stdout) {
     envArs = envArs.concat(`BITBUCKET_COMMIT="${branchName.stdout.trim()}"`);
   }
@@ -41,20 +43,15 @@ function loadBitbucketEnv() {
   return envArs;
 }
 
-function parseVars(envArg) {
+export function parseVars(envArg) {
   return envArg.match(/(?=\b[a-z])\w+=(?:(['"])(?:(?!\1).)*\1|[^,]*)/gi).map(x => x.trim());
 }
 
 /**
  * Returns a random number between min (inclusive) and max (exclusive)
  */
-function between(min, max) {
+export function between(min, max) {
   return Math.floor(
     Math.random() * (max - min) + min
   )
 }
-
-module.exports.save = save;
-module.exports.load = load;
-module.exports.parseVars = parseVars;
-module.exports.loadBitbucketEnv = loadBitbucketEnv;

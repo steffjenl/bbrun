@@ -1,6 +1,6 @@
-const assert = require("check-types").assert;
+import assert from 'check-types';
 
-function extractPipelineName(pipeline) {
+export function extractPipelineName(pipeline) {
   assert.nonEmptyString(pipeline);
   const index = pipeline.indexOf(":");
   if (index < 0) {
@@ -16,12 +16,9 @@ function extractPipelineName(pipeline) {
   }
 }
 
-function parseVars(envArg) {
+export function parseVars(envArg) {
   return envArg
     .trim()
     .split(",")
     .map(x => x.trim());
 }
-
-module.exports.extractPipelineName = extractPipelineName;
-module.exports.parseVars = parseVars;

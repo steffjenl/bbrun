@@ -1,14 +1,14 @@
 "use strict";
-const fs = require("fs");
-const yaml = require("js-yaml");
-const assert = require("check-types").assert;
-const { extractPipelineName } = require("./util");
+import fs from 'fs';
+import yaml from 'js-yaml';
+import assert from 'check-types';
+import { extractPipelineName } from './util.js';
 
 const BB_IMAGE = "atlassian/default-image:latest";
 const BB_TEMPLATE_DOC =
   "https://confluence.atlassian.com/bitbucket/configure-bitbucket-pipelines-yml-792298910.html";
 
-function readTemplate(bbTemplate) {
+export function readTemplate(bbTemplate) {
   if (!fs.existsSync(bbTemplate)) {
     throw new Error(`${bbTemplate} can't be found`);
   }
@@ -17,14 +17,14 @@ function readTemplate(bbTemplate) {
   return new Template(config);
 }
 
-function parse(config) {
+export function parse(config) {
   assert.nonEmptyString(config);
   const jsonConfig = yaml.safeLoad(config);
   validate(jsonConfig);
   return jsonConfig;
 }
 
-function findPipeline(config, pipeline, pipelineName) {
+export function findPipeline(config, pipeline, pipelineName) {
   assert.nonEmptyObject(config);
   assert.nonEmptyString(pipeline);
 
@@ -44,7 +44,7 @@ function findPipeline(config, pipeline, pipelineName) {
   }
 }
 
-function findStepInPipeline(pipeline, stepName) {
+export function findStepInPipeline(pipeline, stepName) {
   for (let i = 0; i < pipeline.length; i++) {
     if (pipeline[i].step && pipeline[i].step.name === stepName) {
       return pipeline[i];
@@ -54,7 +54,7 @@ function findStepInPipeline(pipeline, stepName) {
   }
 }
 
-function validate(config) {
+export function validate(config) {
   try {
     assert.nonEmptyObject(
       config,
@@ -71,7 +71,7 @@ function validate(config) {
   }
 }
 
-class Pipeline {
+export class Pipeline {
   constructor(config) {
     this.config = config;
   }
@@ -98,7 +98,7 @@ class Pipeline {
   }
 }
 
-class Template {
+export class Template {
   constructor(config) {
     validate(config);
     this.config = config;
@@ -114,7 +114,3 @@ class Template {
     return this.config.image ? this.config.image : BB_IMAGE;
   }
 }
-
-module.exports.readTemplate = readTemplate;
-module.exports.parse = parse;
-module.exports.Template = Template;

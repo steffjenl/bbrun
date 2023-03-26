@@ -2,6 +2,7 @@
   "name": "bbrun",
   "version": "0.10.1",
   "description": "Run your Bitbucket Pipelines locally",
+  "type": "module",
   "main": "index.js",
   "preferGlobal": true,
   "bin": "./index.js",
@@ -24,7 +25,7 @@
   "dependencies": {
     "check-types": "11.0.x",
     "js-yaml": "3.13.x",
-    "meow": "4.0.x",
+    "meow": "11.0.x",
     "shelljs": "0.8.x"
   },
   "devDependencies": {
