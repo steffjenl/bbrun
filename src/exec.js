@@ -9,7 +9,7 @@ export default function exec(script, image, flags) {
   }
   const commands = [].concat(
     environmentVars.map((x) => { return x && (x.includes('export') ? x : `export ${x}`); }),
-    loadBitbucketEnv(),
+    process.env.NODE_ENV === 'test' ? [] : loadBitbucketEnv(),
     'set -e',
     script
   );

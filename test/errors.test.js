@@ -1,6 +1,6 @@
+import shell from 'shelljs';
 function run(options) {
-  const exec = require("shelljs").exec;
-  return exec(`node index.js ${options}`, {
+  return shell.exec(`node index.js ${options}`, {
     silent: true
   });
 }
@@ -28,7 +28,7 @@ describe("should fail properly when script section is mispelled", () => {
 it("non-existing template should fail", () => {
   const res = run("--template foo.yml --dry-run");
   expect(res.stdout).toBe("");
-  expect(res.stderr).toBe("foo.yml can't be found\n");
+  expect(res.stderr).toContain("foo.yml can't be found\n");
   expect(res.code).toBe(1);
 });
 

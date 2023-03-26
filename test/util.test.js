@@ -1,5 +1,4 @@
-const { extractPipelineName } = require("../src/util");
-
+import { extractPipelineName } from '../src/util.js';
 describe("extractPipelineName", () => {
   it("general case", () => {
     expect(extractPipelineName("foo:bar")).toMatchObject({

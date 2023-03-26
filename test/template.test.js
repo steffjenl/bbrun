@@ -1,4 +1,4 @@
-const { parse, Template } = require("../src/template");
+import { parse, Template } from '../src/template.js';
 
 describe("Template", () => {
   it("finds the step by name on the default pipeline", () => {

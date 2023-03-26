@@ -1,8 +1,7 @@
+import shell from 'shelljs';
 function run(name, options = "") {
-  const pwd = require("shelljs").pwd();
-  const exec = require("shelljs").exec;
-  const result = exec(
-    `cd ${pwd}/examples/${name} && node ../../index.js ${options}`,
+  const result = shell.exec(
+    `cd ${shell.pwd}/examples/${name} && node ../../index.js ${options}`,
     {
       silent: true
     }

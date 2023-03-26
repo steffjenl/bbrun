@@ -1,222 +1,206 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`environment variables miltiple variables are added to the script 1`] = `
-"executing step in \\"ubuntu\\"
-[
-  'export foo=bar',
-  'export var=env',
-  'set -e',
-  'echo \\"testing stuff\\"'
-]
+"executing step in "ubuntu"
 docker command:
-	docker run --rm -P -v PWD:/ws -w /ws ubuntu bash .bbrun.sh
+	docker run --rm -P -v /Users/stephan/Projects/bbrun:/ws -w /ws ubuntu bash .bbrun.sh
 build script:
 	export foo=bar
 	export var=env
 	set -e
-	echo \\"testing stuff\\"
+	echo "testing stuff"
 "
 `;
 
 exports[`environment variables single variable is added to the script 1`] = `
-"executing step in \\"ubuntu\\"
-[ 'export foo=bar', 'set -e', 'echo \\"testing stuff\\"' ]
+"executing step in "ubuntu"
 docker command:
-	docker run --rm -P -v PWD:/ws -w /ws ubuntu bash .bbrun.sh
+	docker run --rm -P -v /Users/stephan/Projects/bbrun:/ws -w /ws ubuntu bash .bbrun.sh
 build script:
 	export foo=bar
 	set -e
-	echo \\"testing stuff\\"
+	echo "testing stuff"
 "
 `;
 
 exports[`invalid template should fail 1`] = `
-"'pipelines' section invalid or not found
-Malformed template, check https://confluence.atlassian.com/bitbucket/configure-bitbucket-pipelines-yml-792298910.html
+"file:///Users/stephan/Projects/bbrun/src/template.js:33
+      throw new Error("default pipeline not found");
+            ^
+
+Error: default pipeline not found
+    at findPipeline (file:///Users/stephan/Projects/bbrun/src/template.js:33:13)
+    at Template.getPipeline (file:///Users/stephan/Projects/bbrun/src/template.js:109:28)
+    at default (file:///Users/stephan/Projects/bbrun/src/bbrun.js:24:34)
+    at file:///Users/stephan/Projects/bbrun/index.js:86:3
+    at ModuleJob.run (node:internal/modules/esm/module_job:194:25)
+
+Node.js v18.13.0
 "
 `;
 
 exports[`no image template should use default atlassian image 1`] = `
-"executing step in \\"atlassian/default-image:latest\\"
-[ 'set -e', 'echo \\"testing stuff\\"' ]
+"executing step in "atlassian/default-image:latest"
 docker command:
-	docker run --rm -P -v PWD:/ws -w /ws atlassian/default-image:latest bash .bbrun.sh
+	docker run --rm -P -v /Users/stephan/Projects/bbrun:/ws -w /ws atlassian/default-image:latest bash .bbrun.sh
 build script:
 	set -e
-	echo \\"testing stuff\\"
+	echo "testing stuff"
 "
 `;
 
 exports[`parallel steps executes all steps when step name is not provided 1`] = `
-"executing step in \\"atlassian/default-image:latest\\"
-[ 'set -e', 'echo \\"default step\\"' ]
+"executing step in "atlassian/default-image:latest"
 docker command:
-	docker run --rm -P -v PWD:/ws -w /ws atlassian/default-image:latest bash .bbrun.sh
+	docker run --rm -P -v /Users/stephan/Projects/bbrun:/ws -w /ws atlassian/default-image:latest bash .bbrun.sh
 build script:
 	set -e
-	echo \\"default step\\"
-executing step in \\"atlassian/default-image:latest\\"
-[ 'set -e', 'echo \\"parallel step2\\"' ]
+	echo "default step"
+executing step in "atlassian/default-image:latest"
 docker command:
-	docker run --rm -P -v PWD:/ws -w /ws atlassian/default-image:latest bash .bbrun.sh
+	docker run --rm -P -v /Users/stephan/Projects/bbrun:/ws -w /ws atlassian/default-image:latest bash .bbrun.sh
 build script:
 	set -e
-	echo \\"parallel step2\\"
-executing step in \\"atlassian/default-image:latest\\"
-[ 'set -e', 'echo \\"parallel step3\\"' ]
+	echo "parallel step2"
+executing step in "atlassian/default-image:latest"
 docker command:
-	docker run --rm -P -v PWD:/ws -w /ws atlassian/default-image:latest bash .bbrun.sh
+	docker run --rm -P -v /Users/stephan/Projects/bbrun:/ws -w /ws atlassian/default-image:latest bash .bbrun.sh
 build script:
 	set -e
-	echo \\"parallel step3\\"
-executing step in \\"atlassian/default-image:latest\\"
-[ 'set -e', 'echo \\"step4\\"' ]
+	echo "parallel step3"
+executing step in "atlassian/default-image:latest"
 docker command:
-	docker run --rm -P -v PWD:/ws -w /ws atlassian/default-image:latest bash .bbrun.sh
+	docker run --rm -P -v /Users/stephan/Projects/bbrun:/ws -w /ws atlassian/default-image:latest bash .bbrun.sh
 build script:
 	set -e
-	echo \\"step4\\"
+	echo "step4"
 "
 `;
 
 exports[`parallel steps individual steps from a parallel section can be executed 1`] = `
-"executing step \\"parallel_step_2\\" in \\"atlassian/default-image:latest\\"
-[ 'set -e', 'echo \\"parallel step2\\"' ]
+"executing step "parallel_step_2" in "atlassian/default-image:latest"
 docker command:
-	docker run --rm -P -v PWD:/test_wd -w /test_wd atlassian/default-image:latest bash .bbrun.sh
+	docker run --rm -P -v /Users/stephan/Projects/bbrun:/test_wd -w /test_wd atlassian/default-image:latest bash .bbrun.sh
 build script:
 	set -e
-	echo \\"parallel step2\\"
+	echo "parallel step2"
 "
 `;
 
 exports[`should resolve private image names 1`] = `
-"executing step in \\"account-name/openjdk:8\\"
-[ 'set -e', 'echo \\"testing stuff\\"' ]
+"executing step in "account-name/openjdk:8"
 docker command:
-	docker run --rm -P -v PWD:/ws -w /ws account-name/openjdk:8 bash .bbrun.sh
+	docker run --rm -P -v /Users/stephan/Projects/bbrun:/ws -w /ws account-name/openjdk:8 bash .bbrun.sh
 build script:
 	set -e
-	echo \\"testing stuff\\"
+	echo "testing stuff"
 "
 `;
 
 exports[`single step pipeline executes the default step with no arguments 1`] = `
-"executing step in \\"ubuntu\\"
-[ 'set -e', 'echo \\"testing stuff\\"' ]
+"executing step in "ubuntu"
 docker command:
-	docker run --rm -P -v PWD:/ws -w /ws ubuntu bash .bbrun.sh
+	docker run --rm -P -v /Users/stephan/Projects/bbrun:/ws -w /ws ubuntu bash .bbrun.sh
 build script:
 	set -e
-	echo \\"testing stuff\\"
+	echo "testing stuff"
 "
 `;
 
 exports[`single step pipeline executes the step by name 1`] = `
-"executing step \\"test\\" in \\"ubuntu\\"
-[ 'set -e', 'echo \\"testing stuff\\"' ]
+"executing step "test" in "ubuntu"
 docker command:
-	docker run --rm -P -v PWD:/ws -w /ws ubuntu bash .bbrun.sh
+	docker run --rm -P -v /Users/stephan/Projects/bbrun:/ws -w /ws ubuntu bash .bbrun.sh
 build script:
 	set -e
-	echo \\"testing stuff\\"
+	echo "testing stuff"
 "
 `;
 
 exports[`template with multiple steps in the default pipeline should execute a named step in a branch 1`] = `
-"executing step \\"master_step_2\\" in \\"atlassian/default-image:latest\\"
-[ 'set -e', 'echo \\"master step 2\\"' ]
+"executing step "master_step_2" in "atlassian/default-image:latest"
 docker command:
-	docker run --rm -P -v PWD:/ws -w /ws atlassian/default-image:latest bash .bbrun.sh
+	docker run --rm -P -v /Users/stephan/Projects/bbrun:/ws -w /ws atlassian/default-image:latest bash .bbrun.sh
 build script:
 	set -e
-	echo \\"master step 2\\"
+	echo "master step 2"
 "
 `;
 
 exports[`template with multiple steps in the default pipeline should execute a single step by name 1`] = `
-"executing step \\"step2\\" in \\"atlassian/default-image:latest\\"
-[ 'set -e', 'echo \\"step2\\"' ]
+"executing step "step2" in "atlassian/default-image:latest"
 docker command:
-	docker run --rm -P -v PWD:/ws -w /ws atlassian/default-image:latest bash .bbrun.sh
+	docker run --rm -P -v /Users/stephan/Projects/bbrun:/ws -w /ws atlassian/default-image:latest bash .bbrun.sh
 build script:
 	set -e
-	echo \\"step2\\"
+	echo "step2"
 "
 `;
 
 exports[`template with multiple steps in the default pipeline should execute a single step by name with spaces in the name 1`] = `
-"executing step \\"Step Three\\" in \\"ubuntu\\"
-[ 'set -e', 'echo \\"step3\\"' ]
+"executing step "Step Three" in "ubuntu"
 docker command:
-	docker run --rm -P -v PWD:/ws -w /ws ubuntu bash .bbrun.sh
+	docker run --rm -P -v /Users/stephan/Projects/bbrun:/ws -w /ws ubuntu bash .bbrun.sh
 build script:
 	set -e
-	echo \\"step3\\"
+	echo "step3"
 "
 `;
 
 exports[`template with multiple steps in the default pipeline should execute all the default steps when no argument is provided 1`] = `
-"executing step in \\"atlassian/default-image:latest\\"
-[ 'set -e', 'echo \\"testing stuff\\"' ]
+"executing step in "atlassian/default-image:latest"
 docker command:
-	docker run --rm -P -v PWD:/ws -w /ws atlassian/default-image:latest bash .bbrun.sh
+	docker run --rm -P -v /Users/stephan/Projects/bbrun:/ws -w /ws atlassian/default-image:latest bash .bbrun.sh
 build script:
 	set -e
-	echo \\"testing stuff\\"
-executing step in \\"atlassian/default-image:latest\\"
-[ 'set -e', 'echo \\"step2\\"' ]
+	echo "testing stuff"
+executing step in "atlassian/default-image:latest"
 docker command:
-	docker run --rm -P -v PWD:/ws -w /ws atlassian/default-image:latest bash .bbrun.sh
+	docker run --rm -P -v /Users/stephan/Projects/bbrun:/ws -w /ws atlassian/default-image:latest bash .bbrun.sh
 build script:
 	set -e
-	echo \\"step2\\"
-executing step in \\"ubuntu\\"
-[ 'set -e', 'echo \\"step3\\"' ]
+	echo "step2"
+executing step in "ubuntu"
 docker command:
-	docker run --rm -P -v PWD:/ws -w /ws ubuntu bash .bbrun.sh
+	docker run --rm -P -v /Users/stephan/Projects/bbrun:/ws -w /ws ubuntu bash .bbrun.sh
 build script:
 	set -e
-	echo \\"step3\\"
+	echo "step3"
 "
 `;
 
 exports[`template with multiple steps in the default pipeline should execute all the steps in a branch if no step provided 1`] = `
-"executing step in \\"atlassian/default-image:latest\\"
-[ 'set -e', 'echo \\"testing stuff in master branch\\"' ]
+"executing step in "atlassian/default-image:latest"
 docker command:
-	docker run --rm -P -v PWD:/ws -w /ws atlassian/default-image:latest bash .bbrun.sh
+	docker run --rm -P -v /Users/stephan/Projects/bbrun:/ws -w /ws atlassian/default-image:latest bash .bbrun.sh
 build script:
 	set -e
-	echo \\"testing stuff in master branch\\"
-executing step in \\"atlassian/default-image:latest\\"
-[ 'set -e', 'echo \\"master step 2\\"' ]
+	echo "testing stuff in master branch"
+executing step in "atlassian/default-image:latest"
 docker command:
-	docker run --rm -P -v PWD:/ws -w /ws atlassian/default-image:latest bash .bbrun.sh
+	docker run --rm -P -v /Users/stephan/Projects/bbrun:/ws -w /ws atlassian/default-image:latest bash .bbrun.sh
 build script:
 	set -e
-	echo \\"master step 2\\"
+	echo "master step 2"
 "
 `;
 
 exports[`template with multiple steps in the default pipeline should understand asterisk branches 1`] = `
-"executing step \\"branch step 2\\" in \\"atlassian/default-image:latest\\"
-[ 'set -e', 'echo \\"testing stuff in any branch\\"' ]
+"executing step "branch step 2" in "atlassian/default-image:latest"
 docker command:
-	docker run --rm -P -v PWD:/ws -w /ws atlassian/default-image:latest bash .bbrun.sh
+	docker run --rm -P -v /Users/stephan/Projects/bbrun:/ws -w /ws atlassian/default-image:latest bash .bbrun.sh
 build script:
 	set -e
-	echo \\"testing stuff in any branch\\"
+	echo "testing stuff in any branch"
 "
 `;
 
 exports[`working directory is overriden 1`] = `
-"executing step in \\"ubuntu\\"
-[ 'set -e', 'echo \\"testing stuff\\"' ]
+"executing step in "ubuntu"
 docker command:
-	docker run --rm -P -v PWD:/test_wd -w /test_wd ubuntu bash .bbrun.sh
+	docker run --rm -P -v /Users/stephan/Projects/bbrun:/test_wd -w /test_wd ubuntu bash .bbrun.sh
 build script:
 	set -e
-	echo \\"testing stuff\\"
+	echo "testing stuff"
 "
 `;

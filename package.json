@@ -8,9 +8,9 @@
   "bin": "./index.js",
   "scripts": {
     "prettier": "prettier --write *.js src/*.js test/*.js",
-    "test": "jest test/*.js",
-    "test-examples": "jest examples/*.js",
-    "test-all": "jest"
+    "test": "NODE_OPTIONS=--experimental-vm-modules jest test/*.js",
+    "test-examples": "NODE_OPTIONS=--experimental-vm-modules jest examples/*.js",
+    "test-all": "NODE_OPTIONS=--experimental-vm-modules jest"
   },
   "repository": {
     "type": "git",
@@ -29,7 +29,7 @@
     "shelljs": "0.8.x"
   },
   "devDependencies": {
-    "jest": "^24.9.0",
+    "jest": "^29.5.0",
     "prettier": "^1.19.1"
   }
 }

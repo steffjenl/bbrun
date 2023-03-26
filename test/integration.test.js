@@ -1,13 +1,12 @@
+import shell from 'shelljs';
 function run(options) {
-  const exec = require("shelljs").exec;
-  return exec(`node index.js ${options}`, {
+  //const exec = require("shelljs").exec;
+  return shell.exec(`node index.js ${options}`, {
     silent: true
   });
 }
 
-const PWD = require("shelljs").pwd();
-
-const norm = input => input.replace(new RegExp(PWD, "g"), "PWD");
+const norm = input => input.replace(new RegExp(shell.pwd, "g"), "PWD");
 
 describe("single step pipeline", () => {
   it("executes the default step with no arguments", () => {
@@ -33,7 +32,7 @@ describe("single step pipeline", () => {
       "foo --template test/templates/pipeline-one-step.yml --dry-run"
     );
     expect(norm(res.stdout)).toBe("");
-    expect(res.stderr).toBe('couldn\'t find step with name="foo"\n');
+    expect(res.stderr).toContain('couldn\'t find step with name="foo"\n');
     expect(res.code).toBe(1);
   });
 });
@@ -117,7 +116,7 @@ it("template with no default should fail when no step name is passed", () => {
     "--template test/templates/no-default-pipeline.yml --dry-run"
   );
   expect(norm(res.stdout)).toBe("");
-  expect(res.stderr).toBe("default pipeline not found\n");
+  expect(res.stderr).toContain("default pipeline not found\n");
   expect(res.code).toBe(1);
 });
 

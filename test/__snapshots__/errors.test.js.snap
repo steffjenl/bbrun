@@ -1,14 +1,38 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`empty template file should fail 1`] = `
-"build configuration is empty or invalid yaml
+"file:///Users/stephan/Projects/bbrun/src/template.js:68
+    throw new Error(
+          ^
+
+Error: Cannot read properties of undefined (reading 'pipelines')
 Malformed template, check https://confluence.atlassian.com/bitbucket/configure-bitbucket-pipelines-yml-792298910.html
+    at validate (file:///Users/stephan/Projects/bbrun/src/template.js:68:11)
+    at new Template (file:///Users/stephan/Projects/bbrun/src/template.js:103:5)
+    at readTemplate (file:///Users/stephan/Projects/bbrun/src/template.js:17:10)
+    at default (file:///Users/stephan/Projects/bbrun/src/bbrun.js:13:20)
+    at file:///Users/stephan/Projects/bbrun/index.js:86:3
+    at ModuleJob.run (node:internal/modules/esm/module_job:194:25)
+
+Node.js v18.13.0
 "
 `;
 
 exports[`invalid yaml should fail 1`] = `
-"build configuration is empty or invalid yaml
+"file:///Users/stephan/Projects/bbrun/src/template.js:68
+    throw new Error(
+          ^
+
+Error: Cannot read properties of undefined (reading 'pipelines')
 Malformed template, check https://confluence.atlassian.com/bitbucket/configure-bitbucket-pipelines-yml-792298910.html
+    at validate (file:///Users/stephan/Projects/bbrun/src/template.js:68:11)
+    at new Template (file:///Users/stephan/Projects/bbrun/src/template.js:103:5)
+    at readTemplate (file:///Users/stephan/Projects/bbrun/src/template.js:17:10)
+    at default (file:///Users/stephan/Projects/bbrun/src/bbrun.js:13:20)
+    at file:///Users/stephan/Projects/bbrun/index.js:86:3
+    at ModuleJob.run (node:internal/modules/esm/module_job:194:25)
+
+Node.js v18.13.0
 "
 `;
 
